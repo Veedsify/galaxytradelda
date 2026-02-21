@@ -113,10 +113,9 @@ class ProductForm
                             ->relationship()
                             ->schema([
                                 FileUpload::make('url')
-                                    ->label('Image')
-                                    ->image()
-                                    ->directory('products')
-                        ->visibility('public')
+                        ->label('Image')
+                        ->placeholder('Upload an image')
+                        ->directory('products')
                                     ->required()
                                     ->columnSpanFull(),
 
