@@ -47,6 +47,14 @@ class UsersTable
                     ->boolean()
                     ->sortable(),
 
+                TextColumn::make('role')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'admin' => 'danger',
+                        default => 'gray',
+                    })
+                    ->sortable(),
+
                 TextColumn::make('loyalty_points')
                     ->label('Points')
                     ->numeric()
@@ -81,6 +89,13 @@ class UsersTable
 
                 TernaryFilter::make('newsletter_subscribed')
                     ->label('Newsletter'),
+
+                SelectFilter::make('role')
+                    ->label('Role')
+                    ->options([
+                        'user'  => 'User',
+                        'admin' => 'Admin',
+                    ]),
 
                 SelectFilter::make('preferred_currency')
                     ->label('Currency')

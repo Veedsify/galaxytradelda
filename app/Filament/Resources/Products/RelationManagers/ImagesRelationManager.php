@@ -28,7 +28,11 @@ class ImagesRelationManager extends RelationManager
                 FileUpload::make('url')
                     ->label('Image')
                     ->image()
+                    ->disk('public')
                     ->directory('products')
+                    ->visibility('public')
+                    ->imagePreviewHeight('200')
+                    ->maxSize(5120) // 5MB
                     ->required(),
 
                 TextInput::make('alt_text')
@@ -50,7 +54,10 @@ class ImagesRelationManager extends RelationManager
             ->recordTitleAttribute('url')
             ->columns([
                 ImageColumn::make('url')
-                    ->label('Image'),
+                    ->label('Image')
+                    ->disk('public')
+                    ->height(60)
+                    ->width(60),
 
                 TextColumn::make('alt_text')
                     ->limit(30),

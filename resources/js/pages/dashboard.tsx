@@ -7,6 +7,7 @@ import {
     ArrowRight,
     Package,
 } from 'lucide-react';
+import { OrderStatusBadge, ReturnStatusBadge } from '@/components/status-badge';
 import { Badge } from '@/components/ui/badge';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
@@ -63,27 +64,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: dashboard().url },
 ];
 
-const orderStatusVariant: Record<
-    Order['status'],
-    'default' | 'secondary' | 'destructive' | 'outline'
-> = {
-    pending: 'secondary',
-    processing: 'outline',
-    shipped: 'default',
-    delivered: 'default',
-    cancelled: 'destructive',
-};
-
-const returnStatusVariant: Record<
-    ReturnRequest['status'],
-    'default' | 'secondary' | 'destructive' | 'outline'
-> = {
-    pending: 'secondary',
-    approved: 'default',
-    rejected: 'destructive',
-    completed: 'outline',
-};
-
 function StatCard({
     label,
     value,
@@ -106,7 +86,7 @@ function StatCard({
                 <div className={`rounded-lg p-2 ${accent}`}>
                     <Icon className="size-5 text-white" />
                 </div>
-                <ArrowRight className="size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                <ArrowRight className="size-4 text-[#1a2171] opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
             <div>
                 <p className="text-sm text-muted-foreground">{label}</p>
@@ -120,11 +100,11 @@ function StatCard({
 
 function SectionHeader({ title, href }: { title: string; href: string }) {
     return (
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between border-l-4 border-[#1a2171] pl-3">
             <h2 className="font-semibold">{title}</h2>
             <Link
                 href={href}
-                className="flex items-center gap-1 text-sm text-primary hover:underline"
+                className="flex items-center gap-1 text-sm text-[#1a2171] hover:underline"
             >
                 View all <ArrowRight className="size-3.5" />
             </Link>
@@ -150,7 +130,7 @@ export default function Dashboard({
                         value={stats.totalOrders}
                         icon={ShoppingBag}
                         href={ordersIndex().url}
-                        accent="bg-blue-500"
+                        accent="bg-[#1a2171]"
                     />
                     <StatCard
                         label="Total Spent"
@@ -232,16 +212,7 @@ export default function Dashboard({
                                             ${order.total}
                                         </td>
                                         <td className="px-4 py-3">
-                                            <Badge
-                                                variant={
-                                                    orderStatusVariant[
-                                                        order.status
-                                                    ]
-                                                }
-                                                className="capitalize"
-                                            >
-                                                {order.status}
-                                            </Badge>
+                                            <OrderStatusBadge status={order.status} />
                                         </td>
                                         <td className="px-4 py-3 text-muted-foreground">
                                             {new Date(
@@ -251,7 +222,7 @@ export default function Dashboard({
                                         <td className="px-4 py-3">
                                             <Link
                                                 href={ordersShow(order.id).url}
-                                                className="text-sm font-medium text-primary hover:underline"
+                                                className="text-sm font-medium text-[#1a2171] hover:underline"
                                             >
                                                 View
                                             </Link>
@@ -377,16 +348,7 @@ export default function Dashboard({
                                                 {req.type}
                                             </td>
                                             <td className="px-4 py-3">
-                                                <Badge
-                                                    variant={
-                                                        returnStatusVariant[
-                                                            req.status
-                                                        ]
-                                                    }
-                                                    className="capitalize"
-                                                >
-                                                    {req.status}
-                                                </Badge>
+                                                <ReturnStatusBadge status={req.status} />
                                             </td>
                                             <td className="px-4 py-3 text-muted-foreground">
                                                 {new Date(

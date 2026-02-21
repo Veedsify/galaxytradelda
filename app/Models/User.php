@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
@@ -51,6 +53,7 @@ class User extends Authenticatable
         'is_active',
         'loyalty_points',
         'notes',
+        'role',
     ];
 
     /**
@@ -82,6 +85,11 @@ class User extends Authenticatable
             'is_active' => 'boolean',
             'loyalty_points' => 'integer',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === 'admin';
     }
 
     /** @return HasMany<Order, $this> */

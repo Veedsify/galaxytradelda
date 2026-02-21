@@ -15,8 +15,31 @@ trait ProfileValidationRules
     protected function profileRules(?int $userId = null): array
     {
         return [
-            'name' => $this->nameRules(),
+            'name'  => $this->nameRules(),
             'email' => $this->emailRules($userId),
+            // Personal
+            'phone'         => ['nullable', 'string', 'max:20'],
+            'date_of_birth' => ['nullable', 'date'],
+            'gender'        => ['nullable', 'string', 'in:male,female,other,prefer_not_to_say'],
+            // Billing
+            'billing_name'     => ['nullable', 'string', 'max:255'],
+            'billing_address'  => ['nullable', 'string', 'max:255'],
+            'billing_city'     => ['nullable', 'string', 'max:100'],
+            'billing_state'    => ['nullable', 'string', 'max:100'],
+            'billing_country'  => ['nullable', 'string', 'max:100'],
+            'billing_postcode' => ['nullable', 'string', 'max:20'],
+            // Shipping
+            'shipping_name'     => ['nullable', 'string', 'max:255'],
+            'shipping_address'  => ['nullable', 'string', 'max:255'],
+            'shipping_city'     => ['nullable', 'string', 'max:100'],
+            'shipping_state'    => ['nullable', 'string', 'max:100'],
+            'shipping_country'  => ['nullable', 'string', 'max:100'],
+            'shipping_postcode' => ['nullable', 'string', 'max:20'],
+            // Preferences
+            'newsletter_subscribed' => ['nullable', 'boolean'],
+            'marketing_opt_in'      => ['nullable', 'boolean'],
+            'preferred_currency'    => ['nullable', 'string', 'max:3'],
+            'preferred_language'    => ['nullable', 'string', 'max:10'],
         ];
     }
 

@@ -42,7 +42,12 @@ class UserForm
                             ->rule(Password::default())
                             ->revealable()
                             ->helperText('Leave blank when editing to keep the existing password.'),
-
+                Select::make('role')
+                    ->options([
+                        'admin' => 'Admin',
+                        'user' => 'User',
+                    ])
+                    ->required(),
                         Select::make('email_verified_at')
                             ->label('Email Status')
                             ->options([
@@ -201,7 +206,16 @@ class UserForm
                     ->columns(2)
                     ->collapsible()
                     ->schema([
-                        Toggle::make('is_active')
+                Select::make('role')
+                    ->label('Role')
+                    ->options([
+                        'user'  => 'User',
+                        'admin' => 'Admin',
+                    ])
+                    ->default('user')
+                    ->required(),
+
+                Toggle::make('is_active')
                             ->label('Active Account')
                             ->helperText('Inactive users cannot log in.')
                             ->default(true),

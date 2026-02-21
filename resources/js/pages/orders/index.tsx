@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
-import { Badge } from '@/components/ui/badge';
+import { OrderStatusBadge } from '@/components/status-badge';
 import type { BreadcrumbItem } from '@/types';
 import { index as ordersIndex, show as ordersShow } from '@/routes/orders';
 import { dashboard } from '@/routes';
@@ -37,25 +37,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: dashboard().url },
     { title: 'My Orders', href: ordersIndex().url },
 ];
-
-const statusVariant: Record<
-    Order['status'],
-    'default' | 'secondary' | 'destructive' | 'outline'
-> = {
-    pending: 'secondary',
-    processing: 'outline',
-    shipped: 'default',
-    delivered: 'default',
-    cancelled: 'destructive',
-};
-
-const statusLabel: Record<Order['status'], string> = {
-    pending: 'Pending',
-    processing: 'Processing',
-    shipped: 'Shipped',
-    delivered: 'Delivered',
-    cancelled: 'Cancelled',
-};
 
 export default function OrdersIndex({ orders }: { orders: PaginatedOrders }) {
     return (
@@ -133,13 +114,7 @@ export default function OrdersIndex({ orders }: { orders: PaginatedOrders }) {
                                         ${order.total}
                                     </td>
                                     <td className="px-4 py-3">
-                                        <Badge
-                                            variant={
-                                                statusVariant[order.status]
-                                            }
-                                        >
-                                            {statusLabel[order.status]}
-                                        </Badge>
+                                        <OrderStatusBadge status={order.status} />
                                     </td>
                                     <td className="px-4 py-3">
                                         <Link

@@ -116,6 +116,7 @@ class ProductForm
                                     ->label('Image')
                                     ->image()
                                     ->directory('products')
+                        ->visibility('public')
                                     ->required()
                                     ->columnSpanFull(),
 

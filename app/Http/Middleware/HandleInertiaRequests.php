@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -42,6 +44,26 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'quickLinks' => $this->getQuickLinks(),
         ];
+    }
+
+    /**
+     * Top 7 active categories ordered by product count, cached hourly using the file store.
+     *
+     * @return array<int, array{name: string, slug: string}>
+     */
+    private function getQuickLinks(): array
+    {
+        return Cache::store('file')->remember('footer_quick_links', now()->addHour(), function () {
+            return Category::query()
+                ->where('is_active', true)
+                ->withCount(['products' => fn ($q) => $q->where('is_active', true)])
+                ->orderByDesc('products_count')
+                ->limit(7)
+                ->get(['id', 'name', 'slug'])
+                ->map(fn ($c) => ['name' => $c->name, 'slug' => $c->slug])
+                ->all();
+        });
     }
 }

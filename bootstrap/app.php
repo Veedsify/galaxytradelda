@@ -23,5 +23,19 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->respond(function (\Symfony\Component\HttpFoundation\Response $response) {
+            if (
+                in_array($response->getStatusCode(), [403, 404, 405, 500, 503])
+                && !request()->expectsJson()
+                && !app()->runningInConsole()
+            ) {
+                return response()->view(
+                    "errors.{$response->getStatusCode()}",
+                    [],
+                    $response->getStatusCode()
+                );
+            }
+
+            return $response;
+        });
     })->create();

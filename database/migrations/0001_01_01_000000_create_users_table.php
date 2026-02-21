@@ -47,6 +47,7 @@ return new class extends Migration
             $table->string('preferred_language', 10)->default('en');
 
             // Admin
+            $table->string('role', 20)->default('user'); // admin | user
             $table->boolean('is_active')->default(true);
             $table->unsignedInteger('loyalty_points')->default(0);
             $table->text('notes')->nullable();
