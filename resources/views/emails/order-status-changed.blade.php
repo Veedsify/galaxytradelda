@@ -58,13 +58,13 @@
     @elseif($order->status === 'delivered')
     <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:24px;">
         <p style="font-size:13px;color:#15803d;font-weight:600;margin:0;">✅ Your order has been delivered!</p>
-        <p style="font-size:13px;color:#22c55e;margin-top:4px;">We hope you love your purchase. Thank you for shopping with Galaxy Trade LDA!</p>
+        <p style="font-size:13px;color:#22c55e;margin-top:4px;">We hope you love your purchase. Thank you for shopping with Prime Sp Zoo!</p>
     </div>
     @endif
 
     <p style="font-size:13px;color:#888;margin-bottom:24px;">
         If you have any questions about your order, please don't hesitate to
-        <a href="mailto:info@galaxytradelda.com" style="color:#1a2171;text-decoration:none;">contact us</a>.
+        <a href="mailto:info@primespzoo.com" style="color:#1a2171;text-decoration:none;">contact us</a>.
     </p>
 
     <!-- CTA -->

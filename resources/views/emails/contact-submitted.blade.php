@@ -4,7 +4,7 @@
         <tr>
             <td style="background:linear-gradient(135deg,#f5c518,#e8b000);border-radius:8px;padding:16px 20px;">
                 <p style="font-size:14px;font-weight:700;color:#1a2171;margin:0;">📬 New Contact Form Submission</p>
-                <p style="font-size:12px;color:#333;margin-top:4px;">Someone reached out via the Galaxy Trade LDA website.</p>
+                <p style="font-size:12px;color:#333;margin-top:4px;">Someone reached out via the Prime Sp Zoo website.</p>
             </td>
         </tr>
     </table>

@@ -50,17 +50,17 @@ export default function PublicNav() {
                             </a>{' '}
                             | Email Us :{' '}
                             <a
-                                href="mailto:info@galaxytradelda.com"
+                                href="mailto:info@primespzoo.com"
                                 className="hover:text-[#f5c518]"
                             >
-                                info@galaxytradelda.com
+                                info@primespzoo.com
                             </a>
                         </span>
                     </div>
 
                     {/* On xs: show email only */}
                     <a
-                        href="mailto:info@galaxytradelda.com"
+                        href="mailto:info@primespzoo.com"
                         className="flex items-center gap-1 py-2 text-xs text-white/80 hover:text-[#f5c518] sm:hidden"
                     >
                         <svg
@@ -73,7 +73,7 @@ export default function PublicNav() {
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                             <polyline points="22,6 12,13 2,6" />
                         </svg>
-                        info@galaxytradelda.com
+                        info@primespzoo.com
                     </a>
 
                     <Link

@@ -26,7 +26,7 @@
                 <tr>
                     <td style="text-align:center;">
                         <span style="font-size:26px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">
-                            Galaxy<span style="color:#f5c518;">Trade</span> LDA
+                            Prime<span style="color:#f5c518;">Sp</span> Zoo
                         </span>
                         <p style="color:rgba(255,255,255,0.7);font-size:12px;margin-top:4px;letter-spacing:0.5px;">{{ $subject ?? 'Notification' }}</p>
                     </td>
@@ -49,16 +49,16 @@
                 <tr>
                     <td style="text-align:center;">
                         <p style="font-size:12px;color:#888;margin-bottom:6px;">
-                            <strong style="color:#1a2171;">Galaxy Trade LDA</strong>
+                            <strong style="color:#1a2171;">Prime Sp Zoo</strong>
                         </p>
                         <p style="font-size:11px;color:#aaa;">2. OSB Kocadere Sk No:7, 42002 Selçuklu, Konya, Turkey</p>
                         <p style="font-size:11px;color:#aaa;margin-top:2px;">
-                            <a href="mailto:info@galaxytradelda.com" style="color:#1a2171;text-decoration:none;">info@galaxytradelda.com</a>
+                            <a href="mailto:info@primespzoo.com" style="color:#1a2171;text-decoration:none;">info@primespzoo.com</a>
                             &nbsp;·&nbsp;
                             <a href="https://wa.me/351963978321" style="color:#1a2171;text-decoration:none;">WhatsApp</a>
                         </p>
                         <p style="font-size:10px;color:#ccc;margin-top:12px;">
-                            © {{ date('Y') }} Galaxy Trade LDA. All rights reserved.
+                            © {{ date('Y') }} Prime Sp Zoo. All rights reserved.
                         </p>
                     </td>
                 </tr>

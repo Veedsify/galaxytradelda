@@ -109,7 +109,7 @@
 </head>
 <body>
     <header>
-        <a href="/">Galaxy<span>Trade</span> LDA</a>
+        <a href="/">Prime<span>Sp</span> Zoo</a>
     </header>
 
     <main>
@@ -125,7 +125,7 @@
     </main>
 
     <footer>
-        &copy; {{ date('Y') }} Galaxy Trade LDA &nbsp;·&nbsp; All rights reserved.
+        &copy; {{ date('Y') }} Prime Sp Zoo &nbsp;·&nbsp; All rights reserved.
     </footer>
 </body>
 </html>
