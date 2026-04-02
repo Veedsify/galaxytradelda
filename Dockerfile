@@ -2,6 +2,7 @@ FROM php:8.4-fpm-alpine
 
 RUN apk add --no-cache \
     postgresql-dev \
+    libzip-dev \
     linux-headers \
     $PHPIZE_DEPS \
     && docker-php-ext-install pdo pdo_pgsql zip \
