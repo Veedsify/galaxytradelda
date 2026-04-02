@@ -6,12 +6,52 @@ services:
     container_name: galaxytradelda-app
     restart: unless-stopped
     ports:
-      - '8000:8000'
+      - '${APP_PORT:-8000}:8000'
     environment:
-      APP_NAME: PrimeSpZoo
-      APP_ENV: production
+      APP_NAME: ${APP_NAME:-PrimeSpZoo}
+      APP_ENV: ${APP_ENV:-production}
       APP_KEY: ${APP_KEY}
-      APP_DEBUG: 'false'
+      APP_DEBUG: ${APP_DEBUG:-false}
+      APP_URL: ${APP_URL:-http://localhost:8000}
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${DB_DATABASE:-galaxytradelda}
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      SESSION_DRIVER: database
+      QUEUE_CONNECTION: database
+      CACHE_STORE: database
+      # SMTP configuration
+      MAIL_MAILER: ${MAIL_MAILER:-smtp}
+      MAIL_SCHEME: ${MAIL_SCHEME:-tls}
+      MAIL_HOST: ${MAIL_HOST:-smtp.gmail.com}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS:-noreply@example.com}
+      MAIL_FROM_NAME: ${MAIL_FROM_NAME:-PrimeSpZoo}
+      # Redis (optional, uncomment to use)
+      # REDIS_HOST: redis
+      # REDIS_PORT: 6379
+    volumes:
+      - app_storage:/var/www/html/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: galaxytradelda-queue
+    restart: unless-stopped
+    command: ["php", "artisan", "queue:work", "--sleep=3", "--tries=3", "--max-time=3600"]
+    environment:
+      APP_NAME: ${APP_NAME:-PrimeSpZoo}
+      APP_ENV: ${APP_ENV:-production}
+      APP_KEY: ${APP_KEY}
+      APP_DEBUG: ${APP_DEBUG:-false}
       APP_URL: ${APP_URL:-http://localhost:8000}
       DB_CONNECTION: pgsql
       DB_HOST: postgres
@@ -26,13 +66,12 @@ services:
       MAIL_SCHEME: ${MAIL_SCHEME:-tls}
       MAIL_HOST: ${MAIL_HOST:-smtp.gmail.com}
       MAIL_PORT: ${MAIL_PORT:-587}
-      MAIL_USERNAME: ${MAIL_USERNAME}
-      MAIL_PASSWORD: ${MAIL_PASSWORD}
-      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS}
-      MAIL_FROM_NAME: '${APP_NAME}'
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS:-noreply@example.com}
+      MAIL_FROM_NAME: ${MAIL_FROM_NAME:-PrimeSpZoo}
     volumes:
-      - ./storage:/var/www/html/storage:rw
-      - ./bootstrap/cache:/var/www/html/bootstrap/cache:rw
+      - app_storage:/var/www/html/storage
     depends_on:
       postgres:
         condition: service_healthy
@@ -46,19 +85,17 @@ services:
       POSTGRES_USER: ${DB_USERNAME:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
-      - '5432:5432'
+      - '${DB_PORT:-5432}:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data:rw
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test:
-        [
-          'CMD-SHELL',
-          'pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_DATABASE:-galaxytradelda}',
-        ]
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_DATABASE:-galaxytradelda}']
       interval: 10s
       timeout: 5s
       retries: 5
 
 volumes:
   postgres_data:
+    driver: local
+  app_storage:
     driver: local
