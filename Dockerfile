@@ -1,16 +1,3 @@
-# Stage 1: Build frontend assets
-FROM node:22-alpine AS assets
-
-WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci --no-audit --no-fund
-
-COPY resources/ resources/
-COPY public/ public/
-COPY vite.config.ts tsconfig.json ./
-RUN npm run build
-
-# Stage 2: PHP application
 FROM php:8.4-cli-alpine
 
 # Install system dependencies and PHP extensions
@@ -24,6 +11,8 @@ RUN apk add --no-cache \
         oniguruma-dev \
         linux-headers \
         curl \
+        nodejs \
+        npm \
         postgresql-client \
         $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -61,11 +50,14 @@ RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 # Copy application code
 COPY . .
 
-# Copy built frontend assets from stage 1
-COPY --from=assets /app/public/build public/build
-
 # Generate optimized autoloader
 RUN composer dump-autoload --optimize --no-dev
+
+# Install Node dependencies and build frontend assets
+# (Wayfinder Vite plugin requires PHP + artisan during build)
+RUN npm ci --no-audit --no-fund \
+    && npm run build \
+    && rm -rf node_modules
 
 # Prepare storage and cache directories
 RUN mkdir -p \
