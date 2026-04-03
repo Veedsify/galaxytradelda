@@ -26,4 +26,8 @@ fi
 
 echo "Application is ready."
 
+# Start Nginx in the background
+nginx
+
+# Hand off to PHP-FPM (runs in foreground)
 exec "$@"

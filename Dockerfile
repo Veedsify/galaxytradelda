@@ -1,7 +1,8 @@
-FROM php:8.4-cli-alpine
+FROM php:8.4-fpm-alpine
 
-# Install system dependencies and PHP extensions
+# Install system dependencies, Nginx, and PHP extensions
 RUN apk add --no-cache \
+        nginx \
         postgresql-dev \
         libzip-dev \
         libpng-dev \
@@ -37,6 +38,9 @@ RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.
     && echo "opcache.memory_consumption=128" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo "opcache.max_accelerated_files=10000" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo "opcache.validate_timestamps=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+
+# Configure Nginx
+COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -74,7 +78,7 @@ RUN mkdir -p \
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 80
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["php-fpm"]
