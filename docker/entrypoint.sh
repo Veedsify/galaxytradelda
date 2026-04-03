@@ -17,6 +17,8 @@ php artisan migrate --force
 # Create storage symlink
 php artisan storage:link --force 2>/dev/null || true
 
+php artisan db:seed
+
 # Cache configuration, routes, and views for production
 if [ "$APP_ENV" = "production" ]; then
     php artisan config:cache

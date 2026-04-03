@@ -24,18 +24,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        if (!User::where('email', 'admin@primespzoo.com')->exists()) {
+            User::create([
+                'name' => 'Admin User',
+                'email' => 'admin@primespzoo.com',
+            ]);
+        }
 
-        Category::factory(5)->create();
-        Product::factory(50)->create();
-        ProductImage::factory(150)->create();
-        ProductSize::factory(8)->create();
-        Order::factory(20)->create();
-        ReturnRequest::factory(10)->create();
-        OrderItem::factory(100)->create();
-        WishlistItem::factory(30)->create();
+
+        if (config("app.env") === "local") {
+            Category::factory(5)->create();
+            Product::factory(50)->create();
+            ProductImage::factory(150)->create();
+            ProductSize::factory(8)->create();
+            Order::factory(20)->create();
+            ReturnRequest::factory(10)->create();
+            OrderItem::factory(100)->create();
+            WishlistItem::factory(30)->create();
+        }
     }
 }
