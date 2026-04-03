@@ -6,7 +6,7 @@ services:
     container_name: galaxytradelda-app
     restart: unless-stopped
     ports:
-      - '${APP_PORT:-80}:80'
+      - '${APP_PORT:-8080}:80'
     environment:
       APP_NAME: ${APP_NAME:-PrimeSpZoo}
       APP_ENV: ${APP_ENV:-production}
