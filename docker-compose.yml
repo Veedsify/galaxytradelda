@@ -15,7 +15,7 @@ services:
       APP_URL: ${APP_URL:-http://localhost}
       DB_CONNECTION: pgsql
       DB_HOST: postgres
-      DB_PORT: ${DB_PORT:-5432}
+      DB_PORT: 5432
       DB_DATABASE: ${DB_DATABASE:-galaxytradelda}
       DB_USERNAME: ${DB_USERNAME:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
@@ -55,7 +55,7 @@ services:
       APP_URL: ${APP_URL:-http://localhost}
       DB_CONNECTION: pgsql
       DB_HOST: postgres
-      DB_PORT: ${DB_PORT:-5432}
+      DB_PORT: 5432
       DB_DATABASE: ${DB_DATABASE:-galaxytradelda}
       DB_USERNAME: ${DB_USERNAME:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
