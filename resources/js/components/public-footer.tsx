@@ -73,9 +73,19 @@ export default function PublicFooter() {
                         <h3 className="mb-5 text-lg font-bold text-white">
                             About Us
                         </h3>
+                        <div className="mb-3 flex items-center gap-2">
+                            <img
+                                src="/images/primelogo.png"
+                                alt="PrimeSpZoo"
+                                className="h-10 w-10 rounded-full"
+                            />
+                            <span className="text-sm font-bold text-white">
+                                PrimeSpZoo
+                            </span>
+                        </div>
                         <p className="text-sm leading-relaxed text-blue-200">
                             <span className="font-bold text-white">
-                                Prime Sp Zoo
+                                PrimeSpZoo
                             </span>{' '}
                             is a global trading company committed to delivering
                             high-quality products across multiple industries.
@@ -178,7 +188,7 @@ export default function PublicFooter() {
             <div className="relative border-t border-white/10 bg-[#141a5e]">
                 <div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-4 px-6 py-4 sm:flex-row sm:justify-between">
                     <p className="text-xs text-blue-200">
-                        ©Copyright 2025 All Rights Reserved By Prime Sp Zoo
+                        ©Copyright 2025 All Rights Reserved By PrimeSpZoo
                     </p>
                     <nav className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-blue-200">
                         {navLinks.map((link, i) => (

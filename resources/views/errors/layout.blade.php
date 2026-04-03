@@ -125,7 +125,7 @@
     </main>
 
     <footer>
-        &copy; {{ date('Y') }} Prime Sp Zoo &nbsp;·&nbsp; All rights reserved.
+        &copy; {{ date('Y') }} PrimeSpZoo &nbsp;·&nbsp; All rights reserved.
     </footer>
 </body>
 </html>

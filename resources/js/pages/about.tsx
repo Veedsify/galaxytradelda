@@ -104,7 +104,7 @@ export default function About() {
                             Why Choose Us
                         </h2>
                         <p className="text-sm leading-relaxed text-gray-700">
-                            At <strong>Prime Sp Zoo</strong>, we take immense
+                            At <strong>PrimeSpZoo</strong>, we take immense
                             pride in being a dynamic and globally recognized
                             trading company. With a well-established presence in{' '}
                             <strong>Portugal</strong> and a strategic head
@@ -123,7 +123,7 @@ export default function About() {
                             Who We Are
                         </h2>
                         <p className="mb-4 text-sm leading-relaxed text-gray-700">
-                            Prime Sp Zoo is a company built on a foundation of
+                            PrimeSpZoo is a company built on a foundation of
                             trust, integrity, and innovation. We are dedicated
                             to facilitating seamless trade by bridging the gap
                             between manufacturers and buyers worldwide. Our team
@@ -182,7 +182,7 @@ export default function About() {
                             Our Core Values
                         </h2>
                         <p className="mb-4 text-sm leading-relaxed text-gray-700">
-                            At <strong>Prime Sp Zoo</strong>, we uphold a set of
+                            At <strong>PrimeSpZoo</strong>, we uphold a set of
                             core values that guide our operations and business
                             philosophy:
                         </p>
@@ -209,7 +209,7 @@ export default function About() {
                             Our Available Product
                         </h2>
                         <p className="mb-4 text-sm leading-relaxed text-gray-700">
-                            Prime Sp Zoo operates across multiple industries,
+                            PrimeSpZoo operates across multiple industries,
                             supplying a diverse range of high-quality products
                             to businesses worldwide. Our extensive portfolio
                             covers:
@@ -235,10 +235,10 @@ export default function About() {
                         </p>
                     </section>
 
-                    {/* Why Choose Prime Sp Zoo */}
+                    {/* Why Choose PrimeSpZoo */}
                     <section className="mb-10">
                         <h2 className="mb-4 text-xl font-bold text-[#1a2171]">
-                            Why Choose Prime Sp Zoo?
+                            Why Choose PrimeSpZoo?
                         </h2>
                         <ol className="flex flex-col gap-5">
                             {whyChooseReasons.map((r, i) => (
@@ -260,7 +260,7 @@ export default function About() {
                     {/* Contact Info Card */}
                     <section className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-sm text-gray-700">
                         <p className="mb-4 font-semibold text-gray-900">
-                            Prime Sp Zoo — Your Trusted Partner in Global Trade
+                            PrimeSpZoo — Your Trusted Partner in Global Trade
                         </p>
                         <ul className="flex flex-col gap-3">
                             <li className="flex items-start gap-2">

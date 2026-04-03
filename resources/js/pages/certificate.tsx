@@ -126,7 +126,7 @@ export default function Certificate() {
                             Our Certifications & Credentials
                         </h2>
                         <p className="mx-auto max-w-2xl text-sm leading-relaxed text-gray-500">
-                            Prime Sp Zoo holds all necessary certifications to
+                            PrimeSpZoo holds all necessary certifications to
                             operate as a compliant, trustworthy, and
                             internationally recognized trading company. Our
                             credentials reflect our commitment to quality,

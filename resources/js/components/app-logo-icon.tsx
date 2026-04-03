@@ -7,7 +7,7 @@ export default function AppLogoIcon(
         <img
             {...props}
             src="/images/primelogo.png"
-            alt="Prime Sp Zoo"
+            alt="PrimeSpZoo"
             className="size-9 object-contain"
         />
     );

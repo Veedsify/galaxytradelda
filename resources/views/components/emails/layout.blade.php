@@ -49,7 +49,7 @@
                 <tr>
                     <td style="text-align:center;">
                         <p style="font-size:12px;color:#888;margin-bottom:6px;">
-                            <strong style="color:#1a2171;">Prime Sp Zoo</strong>
+                            <strong style="color:#1a2171;">PrimeSpZoo</strong>
                         </p>
                         <p style="font-size:11px;color:#aaa;">2. OSB Kocadere Sk No:7, 42002 Selçuklu, Konya, Turkey</p>
                         <p style="font-size:11px;color:#aaa;margin-top:2px;">
@@ -58,7 +58,7 @@
                             <a href="https://wa.me/351963978321" style="color:#1a2171;text-decoration:none;">WhatsApp</a>
                         </p>
                         <p style="font-size:10px;color:#ccc;margin-top:12px;">
-                            © {{ date('Y') }} Prime Sp Zoo. All rights reserved.
+                            © {{ date('Y') }} PrimeSpZoo. All rights reserved.
                         </p>
                     </td>
                 </tr>
