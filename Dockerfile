@@ -1,21 +1,26 @@
-FROM php:8.4-fpm-alpine
+FROM php:8.4-apache
 
-# Install system dependencies, Nginx, and PHP extensions
-RUN apk add --no-cache \
-        nginx \
-        postgresql-dev \
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Set document root to Laravel's public directory
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Install system dependencies and PHP extensions
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libpq-dev \
         libzip-dev \
         libpng-dev \
-        libjpeg-turbo-dev \
-        freetype-dev \
-        icu-dev \
-        oniguruma-dev \
-        linux-headers \
+        libjpeg62-turbo-dev \
+        libfreetype6-dev \
+        libicu-dev \
+        libonig-dev \
         curl \
         nodejs \
         npm \
         postgresql-client \
-        $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
         pdo \
@@ -30,17 +35,13 @@ RUN apk add --no-cache \
         pcntl \
     && pecl install redis \
     && docker-php-ext-enable redis \
-    && apk del $PHPIZE_DEPS linux-headers \
-    && rm -rf /tmp/pear
+    && rm -rf /var/lib/apt/lists/*
 
 # OPcache settings for production
 RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo "opcache.memory_consumption=128" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo "opcache.max_accelerated_files=10000" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo "opcache.validate_timestamps=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
-
-# Configure Nginx
-COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -81,4 +82,4 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 EXPOSE 80
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
